@@ -70,6 +70,10 @@ export interface Task {
   id: string;
   userId: string;
 
+  // Domain/Project association
+  domainId?: string;
+  projectId?: string;
+
   // Core
   title: string;
   description?: string;
@@ -390,6 +394,11 @@ export interface UserContext {
   userId: string;
   timestamp: Date;
 
+  // Domain context (for multi-life management)
+  currentDomainId?: string;
+  currentDomainType?: 'client' | 'property' | 'job' | 'personal' | 'family';
+  currentProjectId?: string;
+
   // Location
   location?: 'home' | 'work' | 'transit' | 'errand' | 'other';
 
@@ -540,3 +549,9 @@ export const DEFAULTS = {
   EPIC_LOOT_CHANCE: 0.01,
   LEGENDARY_LOOT_CHANCE: 0.001,
 } as const;
+
+// ==========================================
+// DOMAINS & PROJECTS
+// ==========================================
+
+export * from './domains';

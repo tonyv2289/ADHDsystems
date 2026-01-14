@@ -9,3 +9,4 @@ export * from './time-anchor-engine';
 export * from './recovery-engine';
 export * from './context-engine';
 export * from './stakes-engine';
+export * from './domain-engine';
