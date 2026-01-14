@@ -64,6 +64,16 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
+        name="habits"
+        options={{
+          title: 'Habits',
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="checkmark-circle" size={size} color={color} />
+          ),
+          headerTitle: 'Daily Habits',
+        }}
+      />
+      <Tabs.Screen
         name="chains"
         options={{
           title: 'Chains',
