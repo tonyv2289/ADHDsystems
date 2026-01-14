@@ -1,0 +1,32 @@
+{
+  "name": "momentum",
+  "version": "0.1.0",
+  "private": true,
+  "description": "The ADHD Operating System - Built for brains that work differently",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "dev:mobile": "pnpm --filter @momentum/mobile start",
+    "dev:web": "pnpm --filter @momentum/web dev",
+    "build:web": "pnpm --filter @momentum/web build",
+    "build:shared": "pnpm --filter @momentum/shared build",
+    "test": "pnpm -r test",
+    "lint": "pnpm -r lint",
+    "clean": "pnpm -r clean"
+  },
+  "keywords": [
+    "adhd",
+    "productivity",
+    "momentum",
+    "habits",
+    "gamification"
+  ],
+  "author": "Built by someone who gets it",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "packageManager": "pnpm@8.0.0"
+}
