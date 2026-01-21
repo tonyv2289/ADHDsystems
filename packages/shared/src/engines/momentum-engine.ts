@@ -4,7 +4,6 @@
 // Designed around ADHD brain science
 // ============================================
 
-import { v4 as uuid } from 'uuid';
 import {
   Task,
   TaskStatus,
@@ -16,6 +15,11 @@ import {
   SmartSuggestion,
   DEFAULTS,
 } from '../types';
+
+// Simple ID generator that works in React Native
+const generateId = (): string => {
+  return `${Date.now()}-${Math.random().toString(36).substring(2, 11)}`;
+};
 
 // ==========================================
 // TASK OPERATIONS
@@ -38,7 +42,7 @@ export function createTask(userId: string, input: CreateTaskInput): Task {
   const priority = input.priority || 'medium';
 
   return {
-    id: uuid(),
+    id: generateId(),
     userId,
     title: input.title,
     description: input.description,
@@ -128,7 +132,7 @@ export function breakIntoMicroActions(task: Task): Task[] {
   steps.forEach((step, index) => {
     microActions.push({
       ...task,
-      id: uuid(),
+      id: generateId(),
       title: step,
       estimatedMinutes: Math.min(minutesPerStep, 2),
       chainId: task.id, // Original task becomes the chain
@@ -204,7 +208,7 @@ export interface CreateChainInput {
 
 export function createChain(userId: string, input: CreateChainInput): MomentumChain {
   return {
-    id: uuid(),
+    id: generateId(),
     userId,
     name: input.name,
     description: input.description,

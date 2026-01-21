@@ -4,7 +4,8 @@
 // Making future consequences feel immediate
 // ============================================
 
-import { v4 as uuid } from 'uuid';
+// Simple ID generator that works in React Native
+const generateId = (): string => `${Date.now()}-${Math.random().toString(36).substring(2, 11)}`;
 import {
   TimeBlock,
   TimeDebt,
@@ -103,7 +104,7 @@ export function createTimeBlock(
     : 0;
 
   return {
-    id: uuid(),
+    id: generateId(),
     userId,
     title: input.title,
     startTime: input.startTime,
@@ -127,7 +128,7 @@ export function createFocusBlock(
   const endTime = addMinutes(now, durationMinutes);
 
   return {
-    id: uuid(),
+    id: generateId(),
     userId,
     title: 'Focus Time',
     startTime: now,
@@ -167,7 +168,7 @@ export function addTransitionBlocks(
       // Only add if there's a gap
       if (transitionEnd <= next.startTime) {
         withTransitions.push({
-          id: uuid(),
+          id: generateId(),
           userId,
           title: `Transition to ${next.title}`,
           startTime: transitionStart,
@@ -199,7 +200,7 @@ export function createTimeDebt(
   importance: TimeDebt['importance'] = 'medium'
 ): TimeDebt {
   return {
-    id: uuid(),
+    id: generateId(),
     userId,
     description,
     promisedDate,

@@ -4,7 +4,8 @@
 // Because falling off the wagon is expected
 // ============================================
 
-import { v4 as uuid } from 'uuid';
+// Simple ID generator that works in React Native
+const generateId = (): string => `${Date.now()}-${Math.random().toString(36).substring(2, 11)}`;
 import {
   DayRating,
   Recovery,
@@ -110,7 +111,7 @@ export function createDayRating(
   notes?: string
 ): DayRating {
   return {
-    id: uuid(),
+    id: generateId(),
     userId,
     date: new Date(),
     type: evaluation.type,
@@ -135,7 +136,7 @@ export function createMinimumViableDay(
   description: string = 'Do at least one of these to maintain momentum'
 ): MinimumViableDay {
   return {
-    id: uuid(),
+    id: generateId(),
     userId,
     taskIds,
     description,
@@ -171,7 +172,7 @@ export function suggestMVDTasks(tasks: Task[]): Task[] {
  */
 export function startRecovery(userId: string, daysMissed: number): Recovery {
   return {
-    id: uuid(),
+    id: generateId(),
     userId,
     startedAt: new Date(),
     daysMissed,

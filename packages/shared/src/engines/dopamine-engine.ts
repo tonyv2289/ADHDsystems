@@ -4,7 +4,8 @@
 // Variable rewards, XP, levels, achievements
 // ============================================
 
-import { v4 as uuid } from 'uuid';
+// Simple ID generator that works in React Native
+const generateId = (): string => `${Date.now()}-${Math.random().toString(36).substring(2, 11)}`;
 import {
   Task,
   UserStats,
@@ -207,7 +208,7 @@ export function rollForLootDrop(task: Task, stats: UserStats): LootDrop | null {
   }
 
   return {
-    id: uuid(),
+    id: generateId(),
     userId: task.userId,
     type,
     value,
@@ -308,7 +309,7 @@ export function generateDailyQuests(userId: string, stats: UserStats): DailyQues
   const quests: Quest[] = [
     // Always have a "complete tasks" quest
     {
-      id: uuid(),
+      id: generateId(),
       title: 'Task Tackler',
       description: 'Complete any 3 tasks today',
       type: 'complete_tasks',
@@ -319,7 +320,7 @@ export function generateDailyQuests(userId: string, stats: UserStats): DailyQues
     },
     // XP quest scales with level
     {
-      id: uuid(),
+      id: generateId(),
       title: 'XP Hunter',
       description: `Earn ${50 + stats.level * 10} XP today`,
       type: 'earn_xp',
@@ -333,7 +334,7 @@ export function generateDailyQuests(userId: string, stats: UserStats): DailyQues
   // Add streak quest if they have an active streak
   if (stats.currentStreak > 0) {
     quests.push({
-      id: uuid(),
+      id: generateId(),
       title: 'Streak Keeper',
       description: 'Complete at least 1 task to maintain your streak',
       type: 'maintain_streak',
@@ -367,10 +368,10 @@ export function generateDailyQuests(userId: string, stats: UserStats): DailyQues
   ];
 
   const randomQuest = bonusQuests[Math.floor(Math.random() * bonusQuests.length)];
-  quests.push({ ...randomQuest, id: uuid() });
+  quests.push({ ...randomQuest, id: generateId() });
 
   return {
-    id: uuid(),
+    id: generateId(),
     userId,
     date: new Date(),
     quests,
@@ -646,7 +647,7 @@ function checkAchievementCondition(achievement: Achievement, stats: UserStats): 
 
 export function createUserAchievement(userId: string, achievement: Achievement): UserAchievement {
   return {
-    id: uuid(),
+    id: generateId(),
     odajId: userId,
     achievementId: achievement.id,
     unlockedAt: new Date(),
@@ -709,7 +710,7 @@ export function createXPEvent(
   isBonus: boolean = false
 ): XPEvent {
   return {
-    id: uuid(),
+    id: generateId(),
     userId,
     amount,
     reason,

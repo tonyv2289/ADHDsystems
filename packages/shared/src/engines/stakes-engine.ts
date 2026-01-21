@@ -4,7 +4,8 @@
 // Making commitments stick
 // ============================================
 
-import { v4 as uuid } from 'uuid';
+// Simple ID generator that works in React Native
+const generateId = (): string => `${Date.now()}-${Math.random().toString(36).substring(2, 11)}`;
 import {
   Commitment,
   Stake,
@@ -42,7 +43,7 @@ export function createCommitment(
   };
 
   return {
-    id: uuid(),
+    id: generateId(),
     userId,
     description: input.description,
     deadline: input.deadline,
@@ -199,7 +200,7 @@ export function addAccountabilityPartner(
   };
 
   return {
-    id: uuid(),
+    id: generateId(),
     userId,
     partnerUserId,
     partnerName,
@@ -236,7 +237,7 @@ export function createNudge(
   type: Nudge['type']
 ): Nudge {
   return {
-    id: uuid(),
+    id: generateId(),
     fromUserId,
     toUserId,
     message,
@@ -323,7 +324,7 @@ export function createBodyDoubleSession(
   endTime.setMinutes(endTime.getMinutes() + durationMinutes);
 
   return {
-    id: uuid(),
+    id: generateId(),
     hostUserId,
     participantUserIds: [hostUserId],
     startTime: new Date(),
@@ -446,7 +447,7 @@ export function generateProgressUpdate(
   }
 
   return {
-    id: uuid(),
+    id: generateId(),
     userId,
     type,
     content,

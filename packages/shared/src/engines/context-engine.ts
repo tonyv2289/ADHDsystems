@@ -4,7 +4,8 @@
 // Smart surfacing for ADHD brains
 // ============================================
 
-import { v4 as uuid } from 'uuid';
+// Simple ID generator that works in React Native
+const generateId = (): string => `${Date.now()}-${Math.random().toString(36).substring(2, 11)}`;
 import {
   Task,
   UserContext,
@@ -524,7 +525,7 @@ export function startFocusSession(
   taskId?: string
 ): FocusSession {
   return {
-    id: uuid(),
+    id: generateId(),
     userId,
     taskId,
     startTime: new Date(),

@@ -4,7 +4,8 @@
 // Clients, Properties, Job, Family - context switching
 // ============================================
 
-import { v4 as uuid } from 'uuid';
+// Simple ID generator that works in React Native
+const generateId = (): string => `${Date.now()}-${Math.random().toString(36).substring(2, 11)}`;
 import {
   Domain,
   DomainType,
@@ -50,7 +51,7 @@ export function createClient(
   }
 ): Client {
   return {
-    id: uuid(),
+    id: generateId(),
     userId,
     type: 'client',
     name: input.companyName,
@@ -101,7 +102,7 @@ export function createProperty(
   }
 ): Property {
   return {
-    id: uuid(),
+    id: generateId(),
     userId,
     type: 'property',
     name: input.name,
@@ -135,7 +136,7 @@ export function createJob(
   }
 ): Job {
   return {
-    id: uuid(),
+    id: generateId(),
     userId,
     type: 'job',
     name: input.companyName,
@@ -168,7 +169,7 @@ export function createProject(
   }
 ): Project {
   return {
-    id: uuid(),
+    id: generateId(),
     userId,
     domainId,
     domainType,
@@ -196,7 +197,7 @@ export function startTimeEntry(
   taskId?: string
 ): TimeEntry {
   return {
-    id: uuid(),
+    id: generateId(),
     userId,
     clientId,
     taskId,
@@ -349,7 +350,7 @@ export function generateInvoice(
   const subtotal = lineItems.reduce((sum, item) => sum + item.amount, 0);
 
   return {
-    id: uuid(),
+    id: generateId(),
     clientId: client.id,
     userId,
     invoiceNumber: generateInvoiceNumber(client),
@@ -388,7 +389,7 @@ export function addTenant(
   }
 ): Property {
   const tenant: Tenant = {
-    id: uuid(),
+    id: generateId(),
     ...input,
     paymentHistory: [],
   };
@@ -413,7 +414,7 @@ export function recordRentPayment(
   if (!property.tenant) return property;
 
   const payment = {
-    id: uuid(),
+    id: generateId(),
     date: new Date(),
     amount,
     type: 'rent' as const,
@@ -447,7 +448,7 @@ export function addMaintenanceItem(
   }
 ): { property: Property; maintenanceItem: MaintenanceItem } {
   const maintenanceItem: MaintenanceItem = {
-    id: uuid(),
+    id: generateId(),
     propertyId: property.id,
     title: input.title,
     description: input.description,
@@ -741,7 +742,7 @@ export function generateDomainAlerts(
     );
     overdueInvoices.forEach(invoice => {
       alerts.push({
-        id: uuid(),
+        id: generateId(),
         domainId: client.id,
         domainType: 'client',
         type: 'overdue_invoice',
@@ -755,7 +756,7 @@ export function generateDomainAlerts(
     // Follow-up reminders
     if (client.nextFollowUpDate && client.nextFollowUpDate <= new Date()) {
       alerts.push({
-        id: uuid(),
+        id: generateId(),
         domainId: client.id,
         domainType: 'client',
         type: 'follow_up_due',
@@ -771,7 +772,7 @@ export function generateDomainAlerts(
       const daysSince = differenceInDays(new Date(), client.lastContactDate);
       if (daysSince > 30 && client.status === 'active') {
         alerts.push({
-          id: uuid(),
+          id: generateId(),
           domainId: client.id,
           domainType: 'client',
           type: 'client_inactive',
@@ -791,7 +792,7 @@ export function generateDomainAlerts(
     if (property.financials.rentDueDay === today || property.financials.outstandingRent > 0) {
       if (property.financials.outstandingRent > 0) {
         alerts.push({
-          id: uuid(),
+          id: generateId(),
           domainId: property.id,
           domainType: 'property',
           type: 'rent_due',
@@ -808,7 +809,7 @@ export function generateDomainAlerts(
       const daysUntilLeaseEnd = differenceInDays(property.tenant.leaseEnd, new Date());
       if (daysUntilLeaseEnd <= 60 && daysUntilLeaseEnd > 0) {
         alerts.push({
-          id: uuid(),
+          id: generateId(),
           domainId: property.id,
           domainType: 'property',
           type: 'lease_expiring',
@@ -827,7 +828,7 @@ export function generateDomainAlerts(
     );
     urgentMaintenance.forEach(item => {
       alerts.push({
-        id: uuid(),
+        id: generateId(),
         domainId: property.id,
         domainType: 'property',
         type: 'maintenance_urgent',
