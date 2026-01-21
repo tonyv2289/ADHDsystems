@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@expo/vector-icons": "^14.0.0",
-    "@momentum/shared": "workspace:*",
+    "@momentum/shared": "*",
     "@react-navigation/native": "^6.1.9",
     "expo": "~50.0.0",
     "expo-constants": "~15.4.0",
