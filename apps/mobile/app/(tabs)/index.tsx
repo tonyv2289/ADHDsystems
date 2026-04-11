@@ -14,6 +14,7 @@ import {
   Pressable,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { useRouter } from 'expo-router';
 import * as Haptics from 'expo-haptics';
 import { Colors, Spacing, BorderRadius, Typography, Shadows } from '../../constants/theme';
 import { useStore } from '../../store/useStore';
@@ -22,6 +23,7 @@ import { TaskCard, XPBar, StreakBadge, QuickCapture } from '../../components';
 export default function TodayScreen() {
   const [refreshing, setRefreshing] = useState(false);
   const [energyLevel, setEnergyLevel] = useState<1 | 2 | 3 | 4 | 5 | null>(null);
+  const router = useRouter();
 
   const {
     tasks,
@@ -167,6 +169,7 @@ export default function TodayScreen() {
               key={task.id}
               task={task}
               onComplete={() => completeTaskAction(task.id)}
+              onPress={() => router.push(`/task/${task.id}`)}
             />
           ))
         )}

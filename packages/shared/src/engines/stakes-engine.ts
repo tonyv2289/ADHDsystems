@@ -4,8 +4,6 @@
 // Making commitments stick
 // ============================================
 
-// Simple ID generator that works in React Native
-const generateId = (): string => `${Date.now()}-${Math.random().toString(36).substring(2, 11)}`;
 import {
   Commitment,
   Stake,
@@ -14,6 +12,9 @@ import {
   Nudge,
 } from '../types';
 import { differenceInHours, differenceInDays } from 'date-fns';
+
+// Simple ID generator that works in React Native
+const generateId = (): string => `${Date.now()}-${Math.random().toString(36).substring(2, 11)}`;
 
 // ==========================================
 // COMMITMENTS

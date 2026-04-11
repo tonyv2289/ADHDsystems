@@ -4,8 +4,6 @@
 // Clients, Properties, Job, Family - context switching
 // ============================================
 
-// Simple ID generator that works in React Native
-const generateId = (): string => `${Date.now()}-${Math.random().toString(36).substring(2, 11)}`;
 import {
   Domain,
   DomainType,
@@ -31,6 +29,9 @@ import {
 } from '../types/domains';
 import { Task } from '../types';
 import { differenceInDays, startOfMonth, endOfMonth, addDays } from 'date-fns';
+
+// Simple ID generator that works in React Native
+const generateId = (): string => `${Date.now()}-${Math.random().toString(36).substring(2, 11)}`;
 
 // ==========================================
 // DOMAIN CREATION

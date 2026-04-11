@@ -589,16 +589,19 @@ export const useStore = create<MomentumState>()(
 
       // Time Tracking Actions
       startTimeEntry: (clientId, description) => {
+        const { userId } = get();
         const newEntry: TimeEntry = {
           id: generateId(),
+          userId,
           clientId,
           description,
           startTime: new Date(),
-          endTime: null,
+          endTime: undefined,
           duration: 0,
           billable: true,
-          invoiced: false,
-          createdAt: new Date(),
+          billed: false,
+          rate: 0,
+          amount: 0,
         } as TimeEntry;
         set((state) => ({
           timeEntries: [...state.timeEntries, newEntry],

@@ -12,6 +12,7 @@ import {
   Pressable,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { useRouter } from 'expo-router';
 import { Colors, Spacing, BorderRadius, Typography } from '../../constants/theme';
 import { useStore } from '../../store/useStore';
 import { TaskCard, QuickCapture } from '../../components';
@@ -22,6 +23,7 @@ type FilterType = 'all' | 'pending' | 'completed' | 'today';
 export default function TasksScreen() {
   const [filter, setFilter] = useState<FilterType>('pending');
   const { tasks, completeTaskAction, skipTask } = useStore();
+  const router = useRouter();
 
   const filteredTasks = tasks.filter(task => {
     switch (filter) {
@@ -125,6 +127,7 @@ export default function TasksScreen() {
               key={task.id}
               task={task}
               onComplete={() => completeTaskAction(task.id)}
+              onPress={() => router.push(`/task/${task.id}`)}
             />
           ))
         )}

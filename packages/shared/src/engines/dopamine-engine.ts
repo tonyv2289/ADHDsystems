@@ -4,8 +4,6 @@
 // Variable rewards, XP, levels, achievements
 // ============================================
 
-// Simple ID generator that works in React Native
-const generateId = (): string => `${Date.now()}-${Math.random().toString(36).substring(2, 11)}`;
 import {
   Task,
   UserStats,
@@ -21,6 +19,9 @@ import {
   DEFAULTS,
   LevelDefinition,
 } from '../types';
+
+// Simple ID generator that works in React Native
+const generateId = (): string => `${Date.now()}-${Math.random().toString(36).substring(2, 11)}`;
 
 // ==========================================
 // XP SYSTEM

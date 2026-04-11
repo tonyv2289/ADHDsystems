@@ -4,8 +4,6 @@
 // Smart surfacing for ADHD brains
 // ============================================
 
-// Simple ID generator that works in React Native
-const generateId = (): string => `${Date.now()}-${Math.random().toString(36).substring(2, 11)}`;
 import {
   Task,
   UserContext,
@@ -13,6 +11,9 @@ import {
   TaskContext,
   EnergyLevel,
 } from '../types';
+
+// Simple ID generator that works in React Native
+const generateId = (): string => `${Date.now()}-${Math.random().toString(36).substring(2, 11)}`;
 
 // ==========================================
 // CONTEXT DETECTION

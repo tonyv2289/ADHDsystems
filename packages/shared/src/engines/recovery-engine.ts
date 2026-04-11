@@ -4,8 +4,6 @@
 // Because falling off the wagon is expected
 // ============================================
 
-// Simple ID generator that works in React Native
-const generateId = (): string => `${Date.now()}-${Math.random().toString(36).substring(2, 11)}`;
 import {
   DayRating,
   Recovery,
@@ -16,6 +14,9 @@ import {
   XP_REWARDS,
 } from '../types';
 import { differenceInDays, startOfDay, subDays } from 'date-fns';
+
+// Simple ID generator that works in React Native
+const generateId = (): string => `${Date.now()}-${Math.random().toString(36).substring(2, 11)}`;
 
 // ==========================================
 // DAY RATING SYSTEM
